@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D887E952BC5324400AEF4AF /* QuickNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887E942BC5324400AEF4AF /* QuickNoteApp.swift */; };
-		7D887E972BC5324400AEF4AF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887E962BC5324400AEF4AF /* ContentView.swift */; };
 		7D887E992BC5324600AEF4AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D887E982BC5324600AEF4AF /* Assets.xcassets */; };
 		7D887E9C2BC5324600AEF4AF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D887E9B2BC5324600AEF4AF /* Preview Assets.xcassets */; };
 		7D887EA62BC5324600AEF4AF /* QuickNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887EA52BC5324600AEF4AF /* QuickNoteTests.swift */; };
 		7D887EB02BC5324600AEF4AF /* QuickNoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887EAF2BC5324600AEF4AF /* QuickNoteUITests.swift */; };
 		7D887EB22BC5324600AEF4AF /* QuickNoteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887EB12BC5324600AEF4AF /* QuickNoteUITestsLaunchTests.swift */; };
+		7D887EBF2BC5327E00AEF4AF /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887EBE2BC5327E00AEF4AF /* NoteListView.swift */; };
+		7D887EC12BC533A500AEF4AF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887EC02BC533A500AEF4AF /* Note.swift */; };
+		7D887ECE2BC5394300AEF4AF /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D887ECD2BC5394300AEF4AF /* CustomImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +36,6 @@
 
 /* Begin PBXFileReference section */
 		7D887E912BC5324400AEF4AF /* QuickNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D887E942BC5324400AEF4AF /* QuickNoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteApp.swift; sourceTree = "<group>"; };
-		7D887E962BC5324400AEF4AF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D887E982BC5324600AEF4AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D887E9B2BC5324600AEF4AF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D887EA12BC5324600AEF4AF /* QuickNoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickNoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +43,9 @@
 		7D887EAB2BC5324600AEF4AF /* QuickNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D887EAF2BC5324600AEF4AF /* QuickNoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteUITests.swift; sourceTree = "<group>"; };
 		7D887EB12BC5324600AEF4AF /* QuickNoteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7D887EBE2BC5327E00AEF4AF /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		7D887EC02BC533A500AEF4AF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		7D887ECD2BC5394300AEF4AF /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +96,11 @@
 		7D887E932BC5324400AEF4AF /* QuickNote */ = {
 			isa = PBXGroup;
 			children = (
-				7D887E942BC5324400AEF4AF /* QuickNoteApp.swift */,
-				7D887E962BC5324400AEF4AF /* ContentView.swift */,
+				7D887EC82BC5385C00AEF4AF /* UI */,
+				7D887EBE2BC5327E00AEF4AF /* NoteListView.swift */,
 				7D887E982BC5324600AEF4AF /* Assets.xcassets */,
 				7D887E9A2BC5324600AEF4AF /* Preview Content */,
+				7D887EC02BC533A500AEF4AF /* Note.swift */,
 			);
 			path = QuickNote;
 			sourceTree = "<group>";
@@ -125,6 +128,14 @@
 				7D887EB12BC5324600AEF4AF /* QuickNoteUITestsLaunchTests.swift */,
 			);
 			path = QuickNoteUITests;
+			sourceTree = "<group>";
+		};
+		7D887EC82BC5385C00AEF4AF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7D887ECD2BC5394300AEF4AF /* CustomImagePicker.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D887E972BC5324400AEF4AF /* ContentView.swift in Sources */,
-				7D887E952BC5324400AEF4AF /* QuickNoteApp.swift in Sources */,
+				7D887EBF2BC5327E00AEF4AF /* NoteListView.swift in Sources */,
+				7D887EC12BC533A500AEF4AF /* Note.swift in Sources */,
+				7D887ECE2BC5394300AEF4AF /* CustomImagePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
