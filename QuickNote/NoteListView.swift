@@ -26,7 +26,7 @@ struct NoteListView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 ForEach($notes) { $note in
-                    NavigationLink(destination: NoteDetailView(note: $note)) {
+                    NavigationLink(destination: NoteDetailView(note: $note).animation(.easeInOut)) {
                         Text(note.title)
                     }
                 }
