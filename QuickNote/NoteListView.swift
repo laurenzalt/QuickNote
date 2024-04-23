@@ -26,7 +26,7 @@ struct NoteListView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 ForEach($notes) { $note in
-                    NavigationLink(destination: NoteDetailView(note: $note).animation(.easeInOut)) {
+                    NavigationLink(destination: NoteDetailView(note: $note).animation(.easeInOut, value: note.title)) {
                         Text(note.title)
                     }
                 }
@@ -40,14 +40,30 @@ struct NoteListView: View {
     }
 
     private func addNote() {
+        // Ensure the title is not empty
         guard !newNoteTitle.isEmpty else { return }
+
+        // Create a new note with the current title and empty content
         let newNote = Note(title: newNoteTitle, content: "")
+
+        // Append the new note to the list of notes
         notes.append(newNote)
-        print("Adding note: \(newNoteTitle)") // Debug print
-        newNoteTitle = ""
-        print("New note title cleared: \(newNoteTitle)") // Debug print
+        
+        // Debug print to check the adding of a new note
+        print("Adding note: \(newNoteTitle)")
+
+        // Reset the new note title to allow new input
+        DispatchQueue.main.async {
+            self.newNoteTitle = ""
+        }
+
+        // Debug print to verify the title has been cleared
+        print("New note title cleared: \(self.newNoteTitle)")
+
+        // Save the updated list of notes
         saveNotes()
     }
+
 
 
     private func deleteNote(at offsets: IndexSet) {
@@ -68,8 +84,13 @@ struct NoteDetailView: View {
     var body: some View {
         Form {
             TextField("Title", text: $note.title)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             TextEditor(text: $note.content)
                 .frame(minHeight: 200)
+                .placeholder(when: note.content.isEmpty) {
+                    Text("Enter content here").foregroundColor(.gray)
+                }
             if let imageData = note.imageData, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -91,3 +112,18 @@ struct NoteDetailView: View {
         note.imageData = inputImage.jpegData(compressionQuality: 1.0)
     }
 }
+
+extension View {
+    @ViewBuilder
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content
+    ) -> some View {
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
+    }
+}
+
