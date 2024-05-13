@@ -4,7 +4,23 @@ import SwiftUI
 struct QuickNote: App {
     var body: some Scene {
         WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        TabView {
             NoteListView()
+                .tabItem {
+                    Label("Notes", systemImage: "note.text")
+                }
+
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
     }
 }
@@ -14,7 +30,6 @@ struct NoteListView: View {
     @State private var notes: [Note] = []
     @State private var newNoteTitle: String = ""
 
-    // Initialize notes from stored data
     init() {
         _notes = State(initialValue: (try? JSONDecoder().decode([Note].self, from: notesData)) ?? [])
     }
@@ -40,31 +55,12 @@ struct NoteListView: View {
     }
 
     private func addNote() {
-        // Ensure the title is not empty
         guard !newNoteTitle.isEmpty else { return }
-
-        // Create a new note with the current title and empty content
         let newNote = Note(title: newNoteTitle, content: "")
-
-        // Append the new note to the list of notes
         notes.append(newNote)
-        
-        // Debug print to check the adding of a new note
-        print("Adding note: \(newNoteTitle)")
-
-        // Reset the new note title to allow new input
-        DispatchQueue.main.async {
-            self.newNoteTitle = ""
-        }
-
-        // Debug print to verify the title has been cleared
-        print("New note title cleared: \(self.newNoteTitle)")
-
-        // Save the updated list of notes
+        newNoteTitle = ""
         saveNotes()
     }
-
-
 
     private func deleteNote(at offsets: IndexSet) {
         notes.remove(atOffsets: offsets)
@@ -75,6 +71,25 @@ struct NoteListView: View {
         notesData = (try? JSONEncoder().encode(notes)) ?? Data()
     }
 }
+
+struct SettingsView: View {
+    @AppStorage("enableNotifications") var enableNotifications: Bool = false
+    @AppStorage("useDarkMode") var useDarkMode: Bool = false
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("General Settings")) {
+                    Toggle("Enable Notifications", isOn: $enableNotifications)
+                    Toggle("Use Dark Mode", isOn: $useDarkMode)
+                }
+            }
+            .navigationTitle("Settings")
+        }
+    }
+}
+
+
 
 struct NoteDetailView: View {
     @Binding var note: Note
